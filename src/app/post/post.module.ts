@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
+import { PostPageRoutingModule } from './post-routing.module';
 
-import { ProfilePage } from './profile.page';
+import { PostPage } from './post.page';
 import { ShareModule } from '../share.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ShareModule } from '../share.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfilePageRoutingModule,
+    PostPageRoutingModule,
     ShareModule
   ],
-  declarations: [ProfilePage]
+  declarations: [PostPage]
 })
-export class ProfilePageModule {}
+export class PostPageModule {}

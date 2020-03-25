@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  userPosts
+  mainUser: AngularFirestoreDocument
+  sub
+  posts
+  username: string
+  profilePic: string
+
+	constructor(private afs: AngularFirestore, private user: UserService, private router: Router) {
+		this.mainUser = afs.doc(`users/${user.getUID()}`)
+    this.sub = this.mainUser.valueChanges().subscribe(event => {
+      this.posts = event.posts
+			this.username = event.username
+			this.profilePic = event.profilePic
+
+    })
+  }
+  
+  ngOnDestroy(){
+    this.sub.unsubscribe()
+  }
 
   ngOnInit() {
+  }
+
+  goTo(postID:String){
+    this.router.navigate(['/tabs/post/' + postID.split('/')[0]])
   }
 
 }
