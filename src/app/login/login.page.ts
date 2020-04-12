@@ -4,6 +4,8 @@ import { auth } from 'firebase/app';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,7 +19,8 @@ export class LoginPage implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     public user: UserService,
-    public router: Router
+    public router: Router,
+    public alertController: AlertController,
     ) { }
 
   ngOnInit() {}
@@ -42,6 +45,14 @@ export class LoginPage implements OnInit {
       }
     }
 
+  }
+
+  async presentAlert(title: string, content: string){
+    const alert = await this.alertController.create({
+      header: title,
+      message: content,
+      buttons: ['OK']
+    })
   }
 
 }
